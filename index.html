@@ -1,210 +1,314 @@
-<!DOCTYPE html><html lang="ru"><head> 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-wid1th, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">  
-<title>Free Download By Parad1st</title>
-<meta property="og:title" content="Free Download"> 
-<meta property="og:site_name" content="Free Download">
-<meta property="og:image" content="images/Parad1st.png">
-<meta property="og:description" content="Free Download By Parad1st - скачать абсолютно бесплатно!"> 
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="photo">
-<meta name="twitter:title" content="Programm">
-<meta name="twitter:site" content="@fps_boost">
-<meta name="twitter:description" content="FREE!">
-<meta name="twitter:image:src" content="Parad1st.png">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&amp;display=swap" rel="stylesheet">
-<style type="text/css">
-            p {
-                margin: 0;
-            }
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayanokoji x MyBoy's</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Share Tech Mono', monospace;
+            background-color: #0a0a1a;
+            color: #8a2be2;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+        }
 
-            *, *::before, *::after {
-                box-sizing: border-box;
-            }
+        #matrix-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
 
-            .overlay, .scare {
-                position: fixed;
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-                top: 0;
-                left: 0;
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #8a2be2;
+            box-shadow: 0 0 15px #8a2be2;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            filter: hue-rotate(0deg);
+        }
 
-                height: 100vh;
-                width: 100vw;
-            }
+        .avatar:hover {
+            box-shadow: 0 0 25px #8a2be2;
+            filter: hue-rotate(20deg);
+        }
 
-            p.overlay-title {
-                font-size: 24px;
-                font-weight: 900;
-                color: black;
-                line-height: 1;
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #8a2be2;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+        }
 
-                margin-bottom: 16px;
-            }
+        .title::after {
+            content: "|";
+            animation: blink 1s infinite;
+            position: absolute;
+        }
 
-            .overlay-button {
-                display: inline-flex;
-                align-items: center;
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
 
-                height: 40px;
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 300px;
+        }
 
-                padding-right: 24px;
-                padding-left: 24px;
+        .btn {
+            background: rgba(20, 20, 40, 0.7);
+            border: 2px solid #8a2be2;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
 
-                font-size: 16px;
-                font-weight: 500;
-                line-height: 1;
+        .btn:hover {
+            transform: translateY(-5px);
+            background: rgba(138, 43, 226, 0.4);
+            box-shadow: 0 0 20px #8a2be2;
+        }
 
-                border-radius: 4px;
+        .btn::before {
+            content: ">> ";
+            position: absolute;
+            left: -20px;
+            transition: all 0.3s ease;
+        }
 
-                margin: 4px;
+        .btn:hover::before {
+            left: 10px;
+        }
 
-                cursor: pointer;
-            }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
 
-            .overlay-buttons-wrapper {
-                margin: 24px -8px -8px;
-            }
+        .footer a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-            #accept-button {
-                background-color: rgb(132, 94, 194);
+        .footer a:hover {
+            color: #8a2be2;
+            text-shadow: 0 0 5px #8a2be2;
+        }
 
-                color: white;
-            }
+        .footer a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background: #8a2be2;
+            transition: width 0.3s;
+        }
 
-            #decline-button {
-                color: rgb(132, 94, 194);
+        .footer a:hover::after {
+            width: 100%;
+        }
 
-                border: 2px solid rgb(132, 94, 194);
-            }
+        #cube-container {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 100px;
+            height: 100px;
+            z-index: 2;
+        }
 
-            p.overlay-description {
-                font-size: 16px;
-                font-weight: 400;
-                color: rgba(0, 0, 0, 0.5);
-                line-height: 1.25;
+        .cyber-text {
+            position: absolute;
+            font-size: 0.8rem;
+            color: rgba(138, 43, 226, 0.3);
+            z-index: 1;
+            user-select: none;
+        }
 
-                margin-bottom: 16px;
-            }
-
-            a.overlay-link {
-                display: inline-block;
-
-                text-decoration: none;
-
-                font-size: 16px;
-                font-weight: 500;
-                color: rgb(132, 94, 194);
-                line-height: 1;
-
-                position: relative;
-
-                margin-top: 16px;
-            }
-
-            a.overlay-link::before {
-                position: absolute;
-
-                content: "";
-
-                height: calc(50% + 4px);
-                width: calc(100% + 8px);
-
-                bottom: -4px;
-                left: -4px;
-
-                background-color: rgba(132, 94, 194, 0.1);
-            }
-
-            .overlay-body {
-                max-width: 512px;
-
-                text-align: center;
-
-                font-family: "Inter", sans-serif;
-            }
-
-            .overlay[hidden] {
+        @media (max-width: 768px) {
+            #cube-container {
                 display: none;
             }
-
-            .overlay {
-                z-index: 2;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                background-color: #f5f6fa;
-
-                padding-right: 24px;
-                padding-left: 24px;
+            .title {
+                font-size: 1.8rem;
             }
-
-            .scare {
-                z-index: 1;
-            }
-
-            video#video {
-                height: 100%;
-                width: 100%;
-
-                object-fit: cover;
-            }
-
-            video#video::-webkit-media-controls-enclosure {
-                display:none !important;
-            }
-        </style>
+        }
+    </style>
 </head>
 <body>
-<div id="overlay" class="overlay">
-<div class="overlay-body">
-<p class="overlay-title"> ayanokoji x myboy</p>
-<p class="overlay-description">На этом сайте можно найти интимные фото участников нашей фамы.</p>
-<div class="overlay-buttons-wrapper">
-<div id="accept-button" class="overlay-button">Слив ромы</div>
-<div id="decline-button" class="overlay-button">Слив паши</div>
-</div>
-<a href="tg://settings" target="_blank" class="overlay-link">Пидорас нашей фамы</a>
-</div>
-</div>
-<div class="scare">
-<video id="video" class="video" src="media/video.mp4" loop></video>
-</div>
-<script type="text/javascript">
-            const video = document.getElementById("video");
-            const overlay = document.getElementById("overlay");
-            const declineButton = document.getElementById("decline-button");
-            const acceptButton = document.getElementById("accept-button");
+    <div id="matrix-effect"></div>
+    
+    <!-- Генерация киберпанк текста на фоне -->
+    <script>
+        const cyberTexts = [
+            "01001000 01101001", "SYSTEM_LOAD", "ACCESS_GRANTED", 
+            "NO_ERRORS_FOUND", "CRYPTO_LVL5", "SECURE_CHANNEL",
+            "AYANOKOJI", "MYBOY'S", "CYBERPUNK_2077", "NEON_DREAMS",
+            "DATA_STREAM", "CONNECTING...", "WELCOME_USER", "NULL_POINTER",
+            "SYNTAX_ERROR", "ROOT_ACCESS", "ENCRYPTED", "DECODING...",
+            "VIRUS_SCAN", "FIREWALL_UP", "BINARY_CODE", "HEX_VALUE"
+        ];
 
-            let hasClicked;
+        function createCyberText() {
+            for (let i = 0; i < 50; i++) {
+                const text = document.createElement('div');
+                text.className = 'cyber-text';
+                text.textContent = cyberTexts[Math.floor(Math.random() * cyberTexts.length)];
+                text.style.left = `${Math.random() * 100}%`;
+                text.style.top = `${Math.random() * 100}%`;
+                text.style.transform = `rotate(${Math.random() * 360}deg)`;
+                text.style.opacity = Math.random() * 0.5;
+                document.body.appendChild(text);
+            }
+        }
+        createCyberText();
+    </script>
 
-            window.onbeforeunload = function( ) {
-                if(hasClicked) return true;
+    <div class="container">
+        <img src="ava.png" alt="Ayanokoji x MyBoy's" class="avatar">
+        <h1 class="title">Ayanokoji x MyBoy's</h1>
+        <div class="buttons">
+            <a href="https://t.me/your_channel" class="btn">Наш телеграм канал</a>
+            <a href="https://t.me/leader_ls" class="btn">ЛС лидера</a>
+            <a href="https://t.me/your_chat" class="btn">Наш чат</a>
+        </div>
+        <div class="footer">
+            <a href="privacy.html">Условия конфиденциальности</a>
+            <a href="terms.html">Все права защищены</a>
+        </div>
+    </div>
+    <div id="cube-container"></div>
+
+    <script>
+        // 3D куб
+        const cubeContainer = document.getElementById('cube-container');
+        if (cubeContainer) {
+            let scene, camera, renderer, cube;
+            
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(100, 100);
+            cubeContainer.appendChild(renderer.domElement);
+
+            const geometry = new THREE.BoxGeometry();
+            const material = new THREE.MeshBasicMaterial({
+                color: 0x8a2be2,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.8
+            });
+            cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+
+            camera.position.z = 2;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+        }
+
+        // Matrix эффект
+        const matrix = document.getElementById('matrix-effect');
+        if (matrix) {
+            const canvas = document.createElement('canvas');
+            matrix.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = matrix.clientWidth;
+            canvas.height = matrix.clientHeight;
+            
+            const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+            const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const nums = '0123456789';
+            const alphabet = katakana + latin + nums;
+            
+            const fontSize = 16;
+            const columns = canvas.width / fontSize;
+            
+            const rainDrops = [];
+            for (let x = 0; x < columns; x++) {
+                rainDrops[x] = 1;
+            }
+            
+            const draw = () => {
+                ctx.fillStyle = 'rgba(10, 10, 26, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#8a2be2';
+                ctx.font = fontSize + 'px monospace';
+                
+                for (let i = 0; i < rainDrops.length; i++) {
+                    const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                    ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                    
+                    if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        rainDrops[i] = 0;
+                    }
+                    rainDrops[i]++;
+                }
             };
-
-            function buttonClick(event) {
-                event.preventDefault();
-                if(!hasClicked) hasClicked = true;
-                overlay.hidden = true;
-                video.play();
-                videoClick();
-            }
-
-            function videoClick(event) {
-                if(event) event.preventDefault();
-                const { documentElement } = document;
-                if(documentElement.requestFullscreen) documentElement.requestFullscreen();
-                else if(documentElement.mozRequestFullScreen) documentElement.mozRequestFullScreen();
-                else if(documentElement.webkitRequestFullscreen) documentElement.webkitRequestFullscreen();
-                else if(documentElement.msRequestFullscreen) documentElement.msRequestFullscreen();
-            }
-
-            acceptButton.addEventListener("click", buttonClick);
-            declineButton.addEventListener("click", buttonClick);
-            video.addEventListener("click", videoClick);
-        </script>
-
-
-</body></html>
+            
+            setInterval(draw, 30);
+            
+            window.addEventListener('resize', () => {
+                canvas.width = matrix.clientWidth;
+                canvas.height = matrix.clientHeight;
+            });
+        }
+    </script>
+</body>
+</html>
